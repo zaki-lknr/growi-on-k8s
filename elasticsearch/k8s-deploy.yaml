@@ -1,11 +1,12 @@
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   labels:
     app: elasticsearch
   name: elasticsearch
 spec:
+  serviceName: elasticsearch
   replicas: 1
   selector:
     matchLabels:
@@ -18,6 +19,18 @@ spec:
       containers:
       - image: zakihmkc/growi-elasticsearch
         name: elasticsearch
+        volumeMounts:
+        - name: es-data
+          mountPath: /usr/share/elasticsearch/data
+  volumeClaimTemplates:
+  - metadata:
+      name: es-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: rook-ceph-block
+      resources:
+        requests:
+          storage: 8Gi
 ---
 apiVersion: v1
 kind: Service
