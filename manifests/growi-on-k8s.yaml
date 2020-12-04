@@ -21,6 +21,8 @@ spec:
         env:
           - name: MONGO_URI
             value: mongodb://growi-mongo:27017/growi
+          - name: ELASTICSEARCH_URI
+            value: http://elasticsearch:9200/growi
           - name: PASSWORD_SEED
             value: changeme
         livenessProbe:
