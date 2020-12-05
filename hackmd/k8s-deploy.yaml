@@ -1,0 +1,85 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mariadb
+  name: mariadb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mariadb
+  template:
+    metadata:
+      labels:
+        app: mariadb
+    spec:
+      containers:
+      - image: mariadb:10.3
+        name: hackmd
+        args:
+          - mysqld
+          - --character-set-server=utf8
+          - --collation-server=utf8_general_ci
+        env:
+          - name: MYSQL_USER
+            value: hackmd
+          - name: MYSQL_PASSWORD
+            value: hackmdpass
+          - name: MYSQL_DATABASE
+            value: hackmd
+          - name: MYSQL_RANDOM_ROOT_PASSWORD
+            value: "true"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mariadb
+  name: mariadb
+spec:
+  ports:
+  - port: 3306
+    protocol: TCP
+    targetPort: 3306
+    name: mariadb
+  selector:
+    app: mariadb
+  type: ClusterIP
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   labels:
+#     app: hackmd
+#   name: hackmd
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: hackmd
+#   template:
+#     metadata:
+#       labels:
+#         app: hackmd
+#     spec:
+#       containers:
+#       - image: zakihmkc/growi-hackmd
+#         name: hackmd
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   labels:
+#     app: hackmd
+#   name: hackmd
+# spec:
+#   ports:
+#   - port: 3100
+#     protocol: TCP
+#     targetPort: 3000
+#     name: hackmd
+#   selector:
+#     app: hackmd
+#   type: hackmd
