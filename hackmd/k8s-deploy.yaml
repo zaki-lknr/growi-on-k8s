@@ -47,39 +47,46 @@ spec:
   selector:
     app: mariadb
   type: ClusterIP
-# ---
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   labels:
-#     app: hackmd
-#   name: hackmd
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: hackmd
-#   template:
-#     metadata:
-#       labels:
-#         app: hackmd
-#     spec:
-#       containers:
-#       - image: zakihmkc/growi-hackmd
-#         name: hackmd
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   labels:
-#     app: hackmd
-#   name: hackmd
-# spec:
-#   ports:
-#   - port: 3100
-#     protocol: TCP
-#     targetPort: 3000
-#     name: hackmd
-#   selector:
-#     app: hackmd
-#   type: hackmd
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hackmd
+  name: hackmd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hackmd
+  template:
+    metadata:
+      labels:
+        app: hackmd
+    spec:
+      containers:
+      - image: zakihmkc/growi-hackmd
+        name: hackmd
+        env:
+          - name: CMD_DB_URL
+            value: mysql://hackmd:hackmdpass@mariadb:3306/hackmd
+          - name: CMD_CSP_ENABLE
+            value: "false"
+          # - name: GROWI_URI
+          #   value: http://CHANGE-HERE
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: hackmd
+  name: hackmd
+spec:
+  ports:
+  - port: 3100
+    protocol: TCP
+    targetPort: 3000
+    name: hackmd
+  selector:
+    app: hackmd
+  type: ClusterIP
