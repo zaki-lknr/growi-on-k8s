@@ -1,0 +1,18 @@
+apiVersion: skaffold/v1
+kind: Config
+build:
+  artifacts:
+  - image: zakihmkc/growi-hackmd
+    context: hackmd/
+    docker:
+      dockerfile: Dockerfile
+  - image: zakihmkc/growi-elasticsearch
+    context: elasticsearch/
+    docker:
+      dockerfile: Dockerfile
+deploy:
+  kubectl:
+    manifests:
+    - manifests/growi-on-k8s.yaml
+    - elasticsearch/k8s-deploy.yaml
+    - hackmd/k8s-deploy.yaml

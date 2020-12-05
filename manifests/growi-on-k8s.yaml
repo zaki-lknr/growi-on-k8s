@@ -21,8 +21,14 @@ spec:
         env:
           - name: MONGO_URI
             value: mongodb://growi-mongo:27017/growi
+          - name: ELASTICSEARCH_URI
+            value: http://elasticsearch:9200/growi
           - name: PASSWORD_SEED
             value: changeme
+          - name: HACKMD_URI_FOR_SERVER
+            value: http://hackmd:3000
+          - name: HACKMD_URI
+            value: http://192.168.0.186:3000
         livenessProbe:
           httpGet:
             path: /
