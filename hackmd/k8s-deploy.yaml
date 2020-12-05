@@ -72,8 +72,8 @@ spec:
             value: mysql://hackmd:hackmdpass@mariadb:3306/hackmd
           - name: CMD_CSP_ENABLE
             value: "false"
-          # - name: GROWI_URI
-          #   value: http://CHANGE-HERE
+          - name: GROWI_URI
+            value: http://192.168.0.185:3000
 ---
 apiVersion: v1
 kind: Service
@@ -83,10 +83,10 @@ metadata:
   name: hackmd
 spec:
   ports:
-  - port: 3100
+  - port: 3000
     protocol: TCP
     targetPort: 3000
     name: hackmd
   selector:
     app: hackmd
-  type: ClusterIP
+  type: LoadBalancer
