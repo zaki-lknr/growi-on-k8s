@@ -1,11 +1,12 @@
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   labels:
     app: mariadb
   name: mariadb
 spec:
+  serviceName: mariadb
   replicas: 1
   selector:
     matchLabels:
@@ -31,6 +32,18 @@ spec:
             value: hackmd
           - name: MYSQL_RANDOM_ROOT_PASSWORD
             value: "true"
+        volumeMounts:
+          - name: mariadb-data
+            mountPath: /var/lib/mysql
+  volumeClaimTemplates:
+  - metadata:
+      name: mariadb-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: rook-ceph-block
+      resources:
+        requests:
+          storage: 4Gi
 ---
 apiVersion: v1
 kind: Service
