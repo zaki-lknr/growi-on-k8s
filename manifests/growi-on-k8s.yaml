@@ -85,7 +85,6 @@ spec:
       name: mongo-config
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: rook-ceph-block
       resources:
         requests:
           storage: 256Mi
@@ -93,7 +92,6 @@ spec:
       name: mongo-db
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: rook-ceph-block
       resources:
         requests:
           storage: 4Gi
