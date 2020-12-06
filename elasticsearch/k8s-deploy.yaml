@@ -19,6 +19,11 @@ spec:
       containers:
       - image: zakihmkc/growi-elasticsearch:6.8.10
         name: elasticsearch
+        env:
+          - name: ES_JAVA_OPTS
+            value: "-Xms512m -Xmx512m"
+          - name: bootstrap.memory_lock
+            value: "true"
         volumeMounts:
         - name: es-data
           mountPath: /usr/share/elasticsearch/data
