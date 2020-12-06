@@ -78,7 +78,7 @@ spec:
         app: hackmd
     spec:
       containers:
-      - image: zakihmkc/growi-hackmd
+      - image: zakihmkc/growi-hackmd:1.3.0
         name: hackmd
         env:
           - name: CMD_DB_URL
