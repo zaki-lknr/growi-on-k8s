@@ -1,6 +1,8 @@
 # growi-on-k8s
 
-GROWI Wiki on Kubernetes
+[GROWI Wiki](https://github.com/weseek/growi) on Kubernetes
+
+[weseek/growi-docker-compose: growi-docker-compose - The fastest way to boot All-in-One GROWI](https://github.com/weseek/growi-docker-compose)
 
 ## Elasticsearch for GROWI
 
