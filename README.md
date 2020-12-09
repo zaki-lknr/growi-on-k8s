@@ -4,6 +4,8 @@
 
 [weseek/growi-docker-compose: growi-docker-compose - The fastest way to boot All-in-One GROWI](https://github.com/weseek/growi-docker-compose)
 
+解説記事: [Skaffoldを使ってGROWI on K8s用のElasticsearchとHackMDをビルド＆デプロイ - Qiita](https://qiita.com/zaki-lknr/items/58cbd858ceff40c42323)
+
 ## Elasticsearch for GROWI
 
 GROWI用にElasticsearchの日本語プラグインを追加したイメージをビルドします。
